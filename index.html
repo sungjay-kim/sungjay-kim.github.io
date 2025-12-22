@@ -1,0 +1,1579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sungjay Kim — Biosystems Engineering</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      /* NVIDIA design tokens */
+      --primary:        #76b900;
+      --primary-dark:   #5a8d00;
+      --ink:            #000000;
+      --canvas:         #ffffff;
+      --surface-dark:   #000000;
+      --surface-soft:   #f7f7f7;
+      --surface-elev:   #1a1a1a;
+      --hairline:       #cccccc;
+      --hairline-strong:#5e5e5e;
+      --body:           #1a1a1a;
+      --mute:           #757575;
+      --stone:          #898989;
+      --ash:            #a7a7a7;
+      --on-dark:        #ffffff;
+      --on-dark-mute:   rgba(255,255,255,0.7);
+      --link-blue:      #0046a4;
+      --r-sm:           2px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--canvas);
+      color: var(--body);
+      font-family: 'Inter', Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── UTILITY BAR ── */
+    .utility-bar {
+      background: var(--surface-dark);
+      color: var(--on-dark);
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 48px;
+      font-size: 12px;
+      line-height: 1.25;
+      gap: 24px;
+    }
+    .utility-bar a {
+      color: var(--on-dark-mute);
+      transition: color 0.15s;
+    }
+    .utility-bar a:hover { color: var(--primary); }
+    .utility-bar span.sep { color: var(--hairline-strong); }
+
+    /* ── PRIMARY NAV ── */
+    nav.primary-nav {
+      background: var(--surface-dark);
+      color: var(--on-dark);
+      height: 64px;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--hairline-strong);
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-right: 48px;
+    }
+    .nav-brand .brand-square {
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      display: inline-block;
+    }
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+      flex: 1;
+    }
+    .nav-links a {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--on-dark);
+      transition: color 0.15s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .nav-cta {
+      background: var(--primary);
+      color: var(--ink);
+      font-weight: 700;
+      font-size: 14.4px;
+      letter-spacing: 0.144px;
+      padding: 11px 20px;
+      border-radius: var(--r-sm);
+      transition: background 0.15s;
+    }
+    .nav-cta:hover { background: var(--primary-dark); }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--surface-dark);
+      color: var(--on-dark);
+      padding: 80px 48px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.43;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero-eyebrow .corner-sq {
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      display: inline-block;
+    }
+    .hero-name {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0;
+      color: var(--on-dark);
+      margin-bottom: 24px;
+    }
+    .hero-sub {
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--on-dark-mute);
+      max-width: 640px;
+      margin-bottom: 32px;
+    }
+    .hero-sub strong { color: var(--on-dark); font-weight: 700; }
+    .hero-cta-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 11px 24px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      border-radius: var(--r-sm);
+      transition: background 0.15s;
+    }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-outline-dark {
+      background: transparent;
+      color: var(--on-dark);
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.25;
+      padding: 11px 24px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--on-dark);
+      border-radius: var(--r-sm);
+      transition: background 0.15s, color 0.15s;
+    }
+    .btn-outline-dark:hover { background: var(--on-dark); color: var(--ink); }
+
+    /* hero visual */
+    .hero-visual {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      max-width: 360px;
+      margin-left: auto;
+      background: var(--surface-elev);
+      border-radius: var(--r-sm);
+      border: 1px solid var(--hairline-strong);
+      overflow: hidden;
+    }
+    .hero-visual::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--primary);
+      z-index: 2;
+    }
+    .hero-visual svg { width: 100%; height: 100%; display: block; }
+
+    /* hero stats strip */
+    .hero-stats {
+      max-width: 1280px;
+      margin: 64px auto 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      padding-top: 32px;
+      border-top: 1px solid var(--hairline-strong);
+    }
+    .hero-stat .label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--on-dark-mute);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+      line-height: 1;
+    }
+    .hero-stat .value {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--on-dark);
+    }
+
+    /* ── SECTION ── */
+    section.body-section {
+      background: var(--canvas);
+      padding: 64px 48px;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-eyebrow {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.43;
+      color: var(--mute);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 32px;
+    }
+    .section-divider {
+      border-top: 1px solid var(--hairline);
+      margin-bottom: 48px;
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 48px;
+      margin-bottom: 64px;
+    }
+    .about-prose p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--body);
+      margin-bottom: 16px;
+    }
+    .about-prose p strong { font-weight: 700; color: var(--ink); }
+
+    .edu-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 24px;
+      position: relative;
+    }
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--primary);
+    }
+    .edu-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.47;
+      color: var(--ink);
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+    .edu-item {
+      padding: 12px 0;
+      border-top: 1px solid var(--hairline);
+    }
+    .edu-item:first-of-type { border-top: none; padding-top: 0; }
+    .edu-item:last-of-type { padding-bottom: 0; }
+    .edu-degree {
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .edu-name {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .edu-meta {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--body);
+      margin-top: 4px;
+    }
+
+    /* info grid (4-up feature cards) */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .feature-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 20px 20px 24px;
+      position: relative;
+    }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--primary);
+    }
+    .feature-card h4 {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.43;
+      color: var(--mute);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .feature-card ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .feature-card li {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--body);
+      padding-left: 14px;
+      position: relative;
+    }
+    .feature-card li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 6px;
+      height: 1px;
+      background: var(--primary);
+    }
+    .feature-card li small {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--mute);
+      margin-top: 2px;
+    }
+
+    /* ── COAUTHOR DISCLOSURE ── */
+    .coauthor-disclosure {
+      margin-top: 16px;
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      background: var(--canvas);
+    }
+    .coauthor-disclosure[open] { border-color: var(--primary-dark); }
+    .coauthor-disclosure summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 14.4px;
+      font-weight: 700;
+      letter-spacing: 0.144px;
+      text-transform: uppercase;
+      color: var(--ink);
+      transition: background 0.15s, color 0.15s;
+    }
+    .coauthor-disclosure summary::-webkit-details-marker { display: none; }
+    .coauthor-disclosure summary:hover { background: var(--surface-soft); color: var(--primary-dark); }
+    .coauthor-disclosure[open] summary { border-bottom: 1px solid var(--hairline); color: var(--primary-dark); }
+    .coauthor-disclosure .summary-left { display: flex; align-items: center; gap: 12px; }
+    .coauthor-disclosure .summary-count {
+      display: inline-block;
+      background: var(--surface-soft);
+      color: var(--body);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: var(--r-sm);
+    }
+    .coauthor-disclosure[open] .summary-count {
+      background: var(--primary);
+      color: var(--ink);
+    }
+    .coauthor-disclosure .chevron {
+      width: 12px;
+      height: 12px;
+      border-right: 2px solid currentColor;
+      border-bottom: 2px solid currentColor;
+      transform: rotate(45deg);
+      transition: transform 0.2s;
+      margin-bottom: 4px;
+    }
+    .coauthor-disclosure[open] .chevron { transform: rotate(-135deg); margin-bottom: 0; margin-top: 4px; }
+    .coauthor-disclosure .disclosure-body { padding: 16px; }
+    .coauthor-disclosure .pub-list { gap: 12px; }
+    .coauthor-disclosure .pub-card { background: var(--surface-soft); }
+
+    /* ── SUB SECTION (within publications) ── */
+    .subsection-eyebrow {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      margin: 48px 0 16px;
+    }
+    .subsection-title {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+
+    /* ── PUBLICATIONS / TALKS ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pub-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 56px 1fr auto;
+      gap: 16px;
+      align-items: start;
+      position: relative;
+    }
+    .pub-card.featured::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--primary);
+    }
+    .pub-index {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--mute);
+      text-transform: uppercase;
+      padding-top: 4px;
+    }
+    .pub-badge {
+      display: inline-block;
+      background: var(--surface-soft);
+      color: var(--body);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.43;
+      letter-spacing: 0;
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .pub-title {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.47;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .pub-title a:hover { color: var(--primary-dark); }
+    .pub-authors {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--body);
+      margin-bottom: 4px;
+    }
+    .pub-authors strong { font-weight: 700; color: var(--ink); }
+    .pub-venue {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--mute);
+      margin-bottom: 8px;
+    }
+    .pub-keywords {
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--stone);
+    }
+    .pub-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      padding-top: 4px;
+    }
+    .pub-year {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--ink);
+      text-transform: uppercase;
+    }
+    .pub-link {
+      font-size: 14.4px;
+      font-weight: 700;
+      letter-spacing: 0.144px;
+      color: var(--primary-dark);
+      padding: 8px 14px;
+      border: 1px solid var(--primary-dark);
+      border-radius: var(--r-sm);
+      transition: background 0.15s, color 0.15s;
+    }
+    .pub-link:hover { background: var(--primary-dark); color: var(--on-dark); }
+    .pub-link.github-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ── PROJECTS ── */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .project-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      overflow: hidden;
+      display: grid;
+      grid-template-rows: 140px 1fr auto;
+      position: relative;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--primary);
+      z-index: 2;
+    }
+    .project-thumb {
+      background: var(--surface-soft);
+      border-bottom: 1px solid var(--hairline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .project-thumb svg { display: block; }
+    .project-body {
+      padding: 24px;
+    }
+    .project-num {
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .project-card h3 {
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.47;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .project-card p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.67;
+      color: var(--body);
+    }
+    .project-card p em { font-style: normal; color: var(--mute); font-weight: 700; font-size: 12px; }
+    .project-foot {
+      padding: 16px 24px;
+      border-top: 1px solid var(--hairline);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--body);
+      background: var(--surface-soft);
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .project-link {
+      font-size: 14.4px;
+      font-weight: 700;
+      letter-spacing: 0.144px;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+    }
+    .project-link::after { content: ' →'; }
+    .project-link:hover { color: var(--primary); }
+
+    /* ── AWARDS ── */
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .award-card {
+      background: var(--canvas);
+      border: 1px solid var(--hairline);
+      border-radius: var(--r-sm);
+      padding: 24px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+      position: relative;
+    }
+    .award-card.honor::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 12px; height: 12px;
+      background: var(--primary);
+    }
+    .award-mark {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      color: var(--primary-dark);
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid var(--primary-dark);
+      border-radius: var(--r-sm);
+      white-space: nowrap;
+    }
+    .award-title {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--ink);
+    }
+    .award-by {
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--mute);
+      margin-top: 4px;
+    }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: var(--surface-dark);
+      color: var(--on-dark);
+      padding: 64px 48px;
+    }
+    .cta-strip-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .cta-strip h2 {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--on-dark);
+    }
+    .cta-strip p {
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: var(--on-dark-mute);
+      margin-top: 8px;
+    }
+    .cta-strip-buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface-dark);
+      color: var(--on-dark-mute);
+      padding: 64px 48px 32px;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-cols {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--hairline-strong);
+    }
+    .footer-col h5 {
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.5;
+      color: var(--on-dark);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .footer-col a {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.67;
+      color: var(--on-dark-mute);
+      transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--primary); }
+    .footer-base {
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--on-dark);
+    }
+    .footer-brand .brand-square {
+      width: 12px;
+      height: 12px;
+      background: var(--primary);
+      display: inline-block;
+    }
+    .footer-fine {
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0;
+      color: var(--mute);
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { max-width: 280px; margin: 0 auto; }
+      .hero-stats { grid-template-columns: repeat(2, 1fr); }
+      .footer-cols { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .utility-bar, nav.primary-nav, .hero, section.body-section, .cta-strip, footer { padding-left: 24px; padding-right: 24px; }
+      .nav-links { display: none; }
+      .hero { padding-top: 48px; padding-bottom: 48px; }
+      .hero-name { font-size: 36px; }
+      .hero-sub { font-size: 18px; }
+      .section-title { font-size: 28px; }
+      .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid, .awards-grid { grid-template-columns: 1fr; }
+      .pub-card { grid-template-columns: 1fr; }
+      .pub-meta { flex-direction: row; align-items: center; }
+      .footer-cols { grid-template-columns: 1fr; gap: 24px; }
+    }
+    @media (max-width: 480px) {
+      .info-grid { grid-template-columns: 1fr; }
+      .hero-stats { grid-template-columns: 1fr; }
+      .hero-name { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- UTILITY BAR -->
+<div class="utility-bar">
+  <a href="mailto:sj0408@snu.ac.kr">sj0408@snu.ac.kr</a>
+  <span class="sep">/</span>
+  <a href="https://scholar.google.com/citations?user=8Ty8q9sAAAAJ&hl=ko" target="_blank">Google Scholar</a>
+  <span class="sep">/</span>
+  <a href="https://www.linkedin.com/in/sungjay-kim/" target="_blank">LinkedIn</a>
+</div>
+
+<!-- PRIMARY NAV -->
+<nav class="primary-nav">
+  <a class="nav-brand" href="#">
+    <span class="brand-square"></span>
+    <span>Sungjay Kim</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#presentations">Talks</a></li>
+    <li><a href="#awards">Awards</a></li>
+  </ul>
+  <a class="nav-cta" href="mailto:sj0408@snu.ac.kr">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">
+        <span class="corner-sq"></span>
+        <span>Ph.D. Candidate · Seoul National University</span>
+      </div>
+      <h1 class="hero-name">Sungjay Kim</h1>
+      <p class="hero-sub">
+        I build <strong>computer vision</strong> and <strong>deep learning</strong> systems for image-based
+        <strong>plant phenotyping</strong> &mdash; multi-temporal trait estimation, 3D reconstruction and
+        shape completion under occlusion, and data-efficient representation learning across greenhouse
+        and field crops.
+      </p>
+      <div class="hero-cta-row">
+        <a class="btn-primary" href="#publications">View publications</a>
+        <a class="btn-outline-dark" href="mailto:sj0408@snu.ac.kr">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <svg width="100%" height="100%" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- depth legend -->
+        <rect x="328" y="60" width="6" height="240" fill="none" stroke="#5e5e5e" stroke-width="0.5"/>
+        <rect x="329" y="62" width="4" height="58" fill="#1a3d2a"/>
+        <rect x="329" y="121" width="4" height="58" fill="#238a50"/>
+        <rect x="329" y="180" width="4" height="58" fill="#76b900"/>
+        <rect x="329" y="239" width="4" height="58" fill="#bff230"/>
+        <text x="305" y="68" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="700" fill="#a7a7a7" text-anchor="end">FAR</text>
+        <text x="305" y="300" font-family="Inter,Arial,sans-serif" font-size="9" font-weight="700" fill="#a7a7a7" text-anchor="end">NEAR</text>
+        <!-- grid -->
+        <line x1="40" y1="100" x2="310" y2="100" stroke="#1a1a1a" stroke-width="0.5"/>
+        <line x1="40" y1="160" x2="310" y2="160" stroke="#1a1a1a" stroke-width="0.5"/>
+        <line x1="40" y1="220" x2="310" y2="220" stroke="#1a1a1a" stroke-width="0.5"/>
+        <line x1="40" y1="280" x2="310" y2="280" stroke="#1a1a1a" stroke-width="0.5"/>
+        <line x1="100" y1="50" x2="100" y2="320" stroke="#1a1a1a" stroke-width="0.5"/>
+        <line x1="180" y1="50" x2="180" y2="320" stroke="#1a1a1a" stroke-width="0.5"/>
+        <line x1="260" y1="50" x2="260" y2="320" stroke="#1a1a1a" stroke-width="0.5"/>
+        <!-- stem -->
+        <circle cx="180" cy="320" r="3" fill="#1a3d2a"/>
+        <circle cx="178" cy="306" r="3" fill="#1d4a30"/>
+        <circle cx="180" cy="292" r="3" fill="#206038"/>
+        <circle cx="178" cy="278" r="3" fill="#237040"/>
+        <circle cx="180" cy="264" r="3" fill="#268048"/>
+        <circle cx="178" cy="250" r="3" fill="#2a9050"/>
+        <circle cx="180" cy="236" r="3" fill="#2ea058"/>
+        <circle cx="178" cy="222" r="3" fill="#32b060"/>
+        <circle cx="180" cy="208" r="3" fill="#3ed070"/>
+        <circle cx="178" cy="194" r="3" fill="#54d880"/>
+        <circle cx="180" cy="180" r="3" fill="#76b900"/>
+        <circle cx="178" cy="166" r="3" fill="#92d030"/>
+        <circle cx="180" cy="152" r="3" fill="#bff230"/>
+        <!-- left branch -->
+        <circle cx="165" cy="262" r="2.4" fill="#268048"/>
+        <circle cx="150" cy="246" r="2.4" fill="#2a9050"/>
+        <circle cx="135" cy="230" r="2.6" fill="#2ea058"/>
+        <circle cx="120" cy="214" r="2.4" fill="#32b060"/>
+        <circle cx="108" cy="198" r="2.6" fill="#76b900"/>
+        <circle cx="98" cy="184" r="2.4" fill="#92d030"/>
+        <circle cx="92" cy="170" r="2.4" fill="#bff230"/>
+        <circle cx="160" cy="250" r="2" fill="#2ea058"/>
+        <circle cx="142" cy="232" r="2" fill="#32b060"/>
+        <circle cx="128" cy="220" r="2" fill="#76b900"/>
+        <!-- left upper -->
+        <circle cx="158" cy="206" r="2.4" fill="#3ed070"/>
+        <circle cx="140" cy="190" r="2.4" fill="#76b900"/>
+        <circle cx="125" cy="174" r="2.6" fill="#92d030"/>
+        <circle cx="112" cy="158" r="2.4" fill="#bff230"/>
+        <!-- right branch -->
+        <circle cx="195" cy="262" r="2.4" fill="#268048"/>
+        <circle cx="210" cy="246" r="2.4" fill="#2a9050"/>
+        <circle cx="225" cy="230" r="2.6" fill="#2ea058"/>
+        <circle cx="240" cy="214" r="2.4" fill="#32b060"/>
+        <circle cx="252" cy="198" r="2.6" fill="#76b900"/>
+        <circle cx="262" cy="184" r="2.4" fill="#92d030"/>
+        <circle cx="268" cy="170" r="2.4" fill="#bff230"/>
+        <circle cx="200" cy="250" r="2" fill="#2ea058"/>
+        <circle cx="218" cy="232" r="2" fill="#32b060"/>
+        <circle cx="232" cy="220" r="2" fill="#76b900"/>
+        <!-- right upper -->
+        <circle cx="202" cy="206" r="2.4" fill="#3ed070"/>
+        <circle cx="220" cy="190" r="2.4" fill="#76b900"/>
+        <circle cx="235" cy="174" r="2.6" fill="#92d030"/>
+        <circle cx="248" cy="158" r="2.4" fill="#bff230"/>
+        <!-- apex -->
+        <circle cx="172" cy="135" r="2.4" fill="#bff230"/>
+        <circle cx="186" cy="130" r="2.4" fill="#bff230"/>
+        <circle cx="178" cy="118" r="3" fill="#bff230"/>
+        <circle cx="172" cy="105" r="2.4" fill="#bff230"/>
+        <circle cx="188" cy="100" r="2.4" fill="#bff230"/>
+        <circle cx="178" cy="88" r="2.6" fill="#bff230"/>
+        <!-- label -->
+        <text x="40" y="40" font-family="Inter,Arial,sans-serif" font-size="10" font-weight="700" fill="#a7a7a7">3D POINT CLOUD · DEPTH MAP</text>
+        <line x1="40" y1="46" x2="310" y2="46" stroke="#5e5e5e" stroke-width="0.5"/>
+      </svg>
+    </div>
+  </div>
+  <!-- stats -->
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="label">Institution</div>
+      <div class="value">Seoul National University</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label">Lab</div>
+      <div class="value">SNUPHEL</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label">Publications</div>
+      <div class="value">8 + 3 in prep</div>
+    </div>
+    <div class="hero-stat">
+      <div class="label">Expected</div>
+      <div class="value">Aug 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="body-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">01 / About</div>
+    <h2 class="section-title">Bringing perception to crops</h2>
+    <div class="section-divider"></div>
+
+    <div class="about-grid">
+      <div class="about-prose">
+        <p>
+          I am a Ph.D. candidate in Biosystems Engineering at Seoul National University (SNUPHEL Lab),
+          expected to graduate in August 2026. My research sits at the intersection of computer vision,
+          agricultural robotics, and plant science &mdash; building intelligent systems that perceive and
+          quantify crops under real greenhouse and field conditions.
+        </p>
+        <p>
+          I am particularly interested in <strong>occlusion-robust perception</strong>,
+          <strong>3D plant reconstruction</strong>, and <strong>data-efficient learning</strong> via
+          diffusion-based augmentation and self-supervised methods for precision agriculture. I enjoy
+          tackling real-world agricultural challenges and am always open to collaboration.
+        </p>
+      </div>
+      <div class="edu-card">
+        <h3>Education</h3>
+        <div class="edu-item">
+          <div class="edu-degree">Ph.D.</div>
+          <div class="edu-name">Biosystems Engineering</div>
+          <div class="edu-meta">Seoul National University · Mar 2023 – Aug 2026 (expected). Defense scheduled June 2026, SNUPHEL Lab.</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">M.S.</div>
+          <div class="edu-name">Biosystems Engineering / Global Smart Farm</div>
+          <div class="edu-meta">Seoul National University · Mar 2021 – Feb 2023. Thesis: UAV-based infrared thermal imaging for crop water stress estimation.</div>
+        </div>
+        <div class="edu-item">
+          <div class="edu-degree">B.A.</div>
+          <div class="edu-name">Agricultural Economics / Data Sciences</div>
+          <div class="edu-meta">Seoul National University · Mar 2014 – Aug 2020.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="feature-card">
+        <h4>Research Interests</h4>
+        <ul>
+          <li>Image-based plant phenotyping &amp; agricultural CV</li>
+          <li>Multi-temporal trait estimation, 3D reconstruction &amp; shape completion</li>
+          <li>UAV and non-destructive sensing (thermal, hyperspectral, RGB-D)</li>
+          <li>Self-supervised &amp; data-efficient representation learning</li>
+          <li>Growth-dynamics modelling at single-plant resolution</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Tools &amp; Skills</h4>
+        <ul>
+          <li>Python (primary), R</li>
+          <li>PyTorch, TensorFlow</li>
+          <li>Git, Linux, multi-GPU training workflows</li>
+          <li>3D depth imaging &amp; point cloud processing</li>
+          <li>UAV, RGB-D, hyperspectral imaging</li>
+          <li>English (Professional), Korean (Native)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Experience</h4>
+        <ul>
+          <li>Ph.D. Researcher, SNUPHEL Lab, SNU<small>Mar 2023 – present · Seoul, Korea</small></li>
+          <li>Research Intern, Jinong<small>Jul – Dec 2020 · Anyang, Korea</small></li>
+          <li>Research Intern, Pessl Instruments GmbH<small>Mar – Jul 2019 · Weiz, Austria</small></li>
+          <li>Undergraduate Intern, Agri. Information System Lab, SNU<small>Jan 2018 – Jan 2020 · Seoul, Korea</small></li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <h4>Patent</h4>
+        <ul>
+          <li>Multimodal imaging-based system for measuring size of oriental melons<small>Korean Patent · 10-2025-0015782</small></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications" class="body-section" style="background:var(--surface-soft);">
+  <div class="section-inner">
+    <div class="section-eyebrow">02 / Publications</div>
+    <h2 class="section-title">First-author publications</h2>
+    <p style="font-size:15px; color:var(--mute); margin: -16px 0 24px; max-width:720px;">2 first-author peer-reviewed papers below. Co-author publications (6) and manuscripts in preparation (3) are collapsed underneath.</p>
+    <div class="section-divider"></div>
+
+    <div class="pub-list">
+      <div class="pub-card featured">
+        <div class="pub-index">[01]</div>
+        <div class="pub-body">
+          <span class="pub-badge">1st Author</span>
+          <div class="pub-title"><a href="https://doi.org/10.1016/j.plaphe.2025.100097" target="_blank">De-occlusion models and diffusion-based data augmentation for size estimation of on-plant oriental melons</a></div>
+          <div class="pub-authors"><strong>Sungjay Kim</strong>, Xianghui Xin, Sang-Yeon Kim, Gyumin Kim, Min-gyu Baek, Do Yeon Won, Chang Hyeon Baek, Ghiseok Kim</div>
+          <div class="pub-venue">Plant Phenomics, 2025; 7(3):100097</div>
+          <div class="pub-keywords">on-plant oriental melon · diffusion-based augmentation · occlusion-aware · fruit size estimation · transformer segmentation</div>
+        </div>
+        <div class="pub-meta">
+          <span class="pub-year">2025</span>
+          <a class="pub-link" href="https://doi.org/10.1016/j.plaphe.2025.100097" target="_blank">Paper →</a>
+        </div>
+      </div>
+
+      <div class="pub-card featured">
+        <div class="pub-index">[04]</div>
+        <div class="pub-body">
+          <span class="pub-badge">1st Author</span>
+          <div class="pub-title"><a href="https://doi.org/10.1016/j.compag.2023.107847" target="_blank">Application of amodal segmentation on cucumber segmentation and occlusion recovery</a></div>
+          <div class="pub-authors"><strong>Sungjay Kim</strong>, Suk-Ju Hong, Jiwon Ryu, Eungchan Kim, Chang-Hyup Lee, Ghiseok Kim</div>
+          <div class="pub-venue">Computers and Electronics in Agriculture, 2023; 210:107847</div>
+          <div class="pub-keywords">amodal segmentation · cucumber · occlusion recovery · greenhouse harvesting · instance segmentation</div>
+        </div>
+        <div class="pub-meta">
+          <span class="pub-year">2023</span>
+          <a class="pub-link" href="https://doi.org/10.1016/j.compag.2023.107847" target="_blank">Paper →</a>
+        </div>
+      </div>
+    </div>
+
+    <details class="coauthor-disclosure">
+      <summary>
+        <span class="summary-left">
+          <span>Co-author publications</span>
+          <span class="summary-count">6</span>
+        </span>
+        <span class="chevron" aria-hidden="true"></span>
+      </summary>
+      <div class="disclosure-body">
+        <div class="pub-list">
+          <div class="pub-card">
+            <div class="pub-index">[02]</div>
+            <div class="pub-body">
+              <div class="pub-title"><a href="https://doi.org/10.3390/agriculture15111148" target="_blank">Advanced 3D Depth Imaging Techniques for Morphometric Analysis of Detected On-Tree Apples Based on AI Technology</a></div>
+              <div class="pub-authors">Eungchan Kim, Sang-Yeon Kim, Chang-Hyup Lee, <strong>Sungjay Kim</strong>, Jiwon Ryu, Geon-Hee Kim, Seul-Ki Lee, Ghiseok Kim</div>
+              <div class="pub-venue">Agriculture (MDPI), 2025; 15(11):1148</div>
+              <div class="pub-keywords">3D depth imaging · AI · morphometric analysis · object detection · instance segmentation · amodal segmentation · multivariate regression</div>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-year">2025</span>
+              <a class="pub-link" href="https://doi.org/10.3390/agriculture15111148" target="_blank">Paper →</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <div class="pub-index">[03]</div>
+            <div class="pub-body">
+              <div class="pub-title"><a href="https://doi.org/10.1016/j.jfoodeng.2024.112086" target="_blank">Nondestructive freshness evaluation of mackerel fish using Vis/NIR hyperspectral imaging and multivariate analysis</a></div>
+              <div class="pub-authors">Jiwon Ryu, Suk-Ju Hong, Seongmin Park, Eungchan Kim, Chang-Hyup Lee, <strong>Sungjay Kim</strong>, Azfar Ismail, ChangSug Lee, DongHee Kim, Cheorun Jo, Ghiseok Kim</div>
+              <div class="pub-venue">Journal of Food Engineering, 2024; 377:112086</div>
+              <div class="pub-keywords">Vis/NIR hyperspectral imaging · mackerel · freshness · multivariate analysis · nondestructive evaluation</div>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-year">2024</span>
+              <a class="pub-link" href="https://doi.org/10.1016/j.jfoodeng.2024.112086" target="_blank">Paper →</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <div class="pub-index">[05]</div>
+            <div class="pub-body">
+              <div class="pub-title"><a href="https://doi.org/10.3390/agriculture13040918" target="_blank">Classification of Fresh and Frozen-Thawed Beef Using a Hyperspectral Imaging Sensor and Machine Learning</a></div>
+              <div class="pub-authors">Seongmin Park, Suk-Ju Hong, <strong>Sungjay Kim</strong>, Jiwon Ryu, Seungwoo Roh, Ghiseok Kim</div>
+              <div class="pub-venue">Agriculture (MDPI), 2023; 13(4):918</div>
+              <div class="pub-keywords">hyperspectral imaging · beef · machine learning · classification · food quality</div>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-year">2023</span>
+              <a class="pub-link" href="https://doi.org/10.3390/agriculture13040918" target="_blank">Paper →</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <div class="pub-index">[06]</div>
+            <div class="pub-body">
+              <div class="pub-title"><a href="https://doi.org/10.1109/ACCESS.2023.3265998" target="_blank">Application of X-Ray Imaging and Convolutional Neural Networks in the Prediction of Tomato Seed Viability</a></div>
+              <div class="pub-authors">Suk-Ju Hong, Seongmin Park, Chang-Hyup Lee, <strong>Sungjay Kim</strong>, Seung-Woo Roh, Nandita Irsaulul Nurhisna, Ghiseok Kim</div>
+              <div class="pub-venue">IEEE Access, 2023; 11:38061–38071</div>
+              <div class="pub-keywords">X-ray imaging · CNN · tomato seed viability · nondestructive prediction</div>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-year">2023</span>
+              <a class="pub-link" href="https://doi.org/10.1109/ACCESS.2023.3265998" target="_blank">Paper →</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <div class="pub-index">[07]</div>
+            <div class="pub-body">
+              <div class="pub-title"><a href="https://doi.org/10.13031/ja.14982" target="_blank">Nondestructive Prediction of Rice Seed Viability Using Spectral and Spatial Information Modeling of Visible–Near Infrared Hyperspectral Images</a></div>
+              <div class="pub-authors">Suk-Ju Hong, Tao Yang, Sang-Yeon Kim, EungChan Kim, ChangHyup Lee, Nandita Irasalulul Nurhisna, <strong>Sungjay Kim</strong>, Seung-Woo Roh, Jiwon Ryu, Ghiseok Kim</div>
+              <div class="pub-venue">Journal of the ASABE, 2022; 65(5):997–1006</div>
+              <div class="pub-keywords">rice seed viability · Vis/NIR hyperspectral · spectral-spatial modeling · nondestructive</div>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-year">2022</span>
+              <a class="pub-link" href="https://doi.org/10.13031/ja.14982" target="_blank">Paper →</a>
+            </div>
+          </div>
+
+          <div class="pub-card">
+            <div class="pub-index">[08]</div>
+            <div class="pub-body">
+              <div class="pub-title"><a href="https://doi.org/10.1038/s41598-022-25260-9" target="_blank">CNN-based object detection and growth estimation of plum fruit (Prunus mume) using RGB and depth imaging techniques</a></div>
+              <div class="pub-authors">EungChan Kim, Suk-Ju Hong, Sang-Yeon Kim, Chang-Hyup Lee, <strong>Sungjay Kim</strong>, Hyuck-Joo Kim, Ghiseok Kim</div>
+              <div class="pub-venue">Scientific Reports, 2022; 12:20796</div>
+              <div class="pub-keywords">plum fruit · CNN · object detection · RGB-D · growth estimation</div>
+            </div>
+            <div class="pub-meta">
+              <span class="pub-year">2022</span>
+              <a class="pub-link" href="https://doi.org/10.1038/s41598-022-25260-9" target="_blank">Paper →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <div class="subsection-eyebrow">02.b / Manuscripts in Preparation</div>
+    <h3 class="subsection-title">In submission &amp; preparation</h3>
+    <div class="pub-list">
+      <div class="pub-card featured">
+        <div class="pub-index">[M1]</div>
+        <div class="pub-body">
+          <span class="pub-badge">1st Author</span>
+          <div class="pub-title">Sequential 3D shape completion of greenhouse fruits via parameter-free temporal fusion of multi-session RGB-D scans</div>
+          <div class="pub-authors"><strong>Sungjay Kim</strong>, et al., Pieter M. Blok</div>
+          <div class="pub-venue">Manuscript in preparation · target submission 2026</div>
+          <div class="pub-keywords">3D shape completion · multi-session RGB-D · temporal fusion · greenhouse fruit phenotyping</div>
+        </div>
+        <div class="pub-meta">
+          <span class="pub-year">2026</span>
+          <a class="pub-link github-link" href="https://github.com/sungjay-kim/SCoRe" target="_blank" aria-label="SCoRe repository on GitHub">
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+            </svg>
+            <span>SCoRe</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="pub-card featured">
+        <div class="pub-index">[M2]</div>
+        <div class="pub-body">
+          <span class="pub-badge">1st Author</span>
+          <div class="pub-title">Per-fruit harvest timing in vertical hydroponic systems via logistic growth-curve modelling of volume trajectories</div>
+          <div class="pub-authors"><strong>Sungjay Kim</strong>, et al.</div>
+          <div class="pub-venue">Manuscript in preparation · target submission 2026</div>
+          <div class="pub-keywords">harvest timing · vertical hydroponics · logistic growth · volume trajectory · per-fruit modelling</div>
+        </div>
+        <div class="pub-meta">
+          <span class="pub-year">2026</span>
+        </div>
+      </div>
+
+      <div class="pub-card featured">
+        <div class="pub-index">[M3]</div>
+        <div class="pub-body">
+          <span class="pub-badge">Co-first</span>
+          <div class="pub-title">Automated 3D Soybean Phenotyping via Gaussian Surfels and Dense Point Clouds: A Comparative Study of 3D Representation for Plant Trait Extraction</div>
+          <div class="pub-authors"><strong>Sungjay Kim</strong>*, Xianghui Xin*, et al. <small style="color:var(--mute); font-weight:400;">*Equal contribution</small></div>
+          <div class="pub-venue">Manuscript in preparation · target submission 2026</div>
+          <div class="pub-keywords">Gaussian surfels · dense point clouds · soybean phenotyping · 3D representation · trait extraction</div>
+        </div>
+        <div class="pub-meta">
+          <span class="pub-year">2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="body-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">03 / Projects</div>
+    <h2 class="section-title">Research projects</h2>
+    <div class="section-divider"></div>
+
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-thumb">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <circle cx="16" cy="30" r="7" stroke="#76b900" stroke-width="2"/>
+            <circle cx="32" cy="18" r="7" stroke="#1a1a1a" stroke-width="2"/>
+            <path d="M8 42 L40 42" stroke="#757575" stroke-width="1"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-num">P.01 · IPET · Assistant Researcher · 2025</div>
+          <h3>Cucurbit Phenotyping &amp; Autonomous Harvesting Robot</h3>
+          <p>Non-destructive evaluation of cucurbit fruit physical properties using hyperspectral and ultrasound imaging, in support of an autonomous harvesting platform. <em>Apr 2025 – Present</em>.</p>
+        </div>
+        <div class="project-foot">
+          <div class="tags">
+            <span class="tag">Hyperspectral</span>
+            <span class="tag">Ultrasound</span>
+            <span class="tag">Harvesting</span>
+          </div>
+          <a class="project-link" href="#">Details</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <rect x="6" y="14" width="26" height="20" rx="1" stroke="#76b900" stroke-width="2"/>
+            <rect x="14" y="6" width="26" height="20" rx="1" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="3,2"/>
+            <circle cx="18" cy="24" r="3" fill="#76b900"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-num">P.02 · RDA · Project Manager · 2024–</div>
+          <h3>Ripeness &amp; Yield Prediction for Oriental Melon Harvesting Robot</h3>
+          <p>3D shape completion of on-vine oriental melons under occlusion using RGB-D and learned latent representations, plus a selective harvesting policy from per-fruit temporal growth-rate modelling. <em>Apr 2024 – Present</em>.</p>
+        </div>
+        <div class="project-foot">
+          <div class="tags">
+            <span class="tag">RGB-D</span>
+            <span class="tag">Shape Completion</span>
+            <span class="tag">Selective Harvest</span>
+          </div>
+          <a class="project-link" href="#">Details</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M8 38 L8 16 L24 8 L40 16 L40 38 Z" stroke="#76b900" stroke-width="2" fill="none"/>
+            <circle cx="24" cy="26" r="4" fill="#1a1a1a"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-num">P.03 · IPET · Main Researcher · 2021–2024</div>
+          <h3>Hydroponic Vegetable Monitoring &amp; Robotic Harvesting</h3>
+          <p>On-vine tomato size and weight estimation in greenhouse settings; diffusion-based augmentation and de-occlusion segmentation for oriental melon size estimation (Plant Phenomics 2025). <em>Apr 2021 – Dec 2024</em>.</p>
+        </div>
+        <div class="project-foot">
+          <div class="tags">
+            <span class="tag">Diffusion</span>
+            <span class="tag">De-occlusion</span>
+            <span class="tag">Greenhouse</span>
+          </div>
+          <a class="project-link" href="https://doi.org/10.1016/j.plaphe.2025.100097" target="_blank">Paper</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <ellipse cx="24" cy="24" rx="16" ry="6" stroke="#76b900" stroke-width="2"/>
+            <ellipse cx="24" cy="24" rx="8" ry="3" stroke="#1a1a1a" stroke-width="2" stroke-dasharray="2,2"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-num">P.04 · IPET · Project Manager · 2020–2022</div>
+          <h3>Machine Vision for Greenhouse Cucumber Harvesting</h3>
+          <p>Cucumber amodal segmentation and occlusion recovery (Computers and Electronics in Agriculture 2023); physical-property analysis for determining optimal harvest timing. <em>Apr 2020 – Dec 2022</em>.</p>
+        </div>
+        <div class="project-foot">
+          <div class="tags">
+            <span class="tag">Amodal Seg.</span>
+            <span class="tag">Occlusion</span>
+            <span class="tag">Cucumber</span>
+          </div>
+          <a class="project-link" href="#">Paper</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <path d="M6 34 Q14 18 24 24 Q34 30 42 12" stroke="#76b900" stroke-width="2" fill="none"/>
+            <line x1="6" y1="40" x2="42" y2="40" stroke="#757575" stroke-width="1"/>
+            <circle cx="24" cy="24" r="3" fill="#76b900"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-num">P.05 · RDA · Main Researcher · 2020–2022</div>
+          <h3>UAV-Based Water-Stress Assessment for Fruit Trees</h3>
+          <p>UAV thermal imaging and canopy-temperature extraction for Crop Water Stress Index (CWSI) estimation in apple orchards. Formed the basis of the M.S. thesis. <em>Apr 2020 – Dec 2022</em>.</p>
+        </div>
+        <div class="project-foot">
+          <div class="tags">
+            <span class="tag">UAV</span>
+            <span class="tag">Thermal IR</span>
+            <span class="tag">CWSI</span>
+          </div>
+          <a class="project-link" href="#">Thesis</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-thumb">
+          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+            <line x1="24" y1="10" x2="24" y2="40" stroke="#76b900" stroke-width="2"/>
+            <path d="M24 16 L18 13 M24 16 L30 13" stroke="#76b900" stroke-width="2" stroke-linecap="round"/>
+            <path d="M24 22 L17 18 M24 22 L31 18" stroke="#76b900" stroke-width="2" stroke-linecap="round"/>
+            <path d="M24 28 L17 24 M24 28 L31 24" stroke="#76b900" stroke-width="2" stroke-linecap="round"/>
+            <rect x="6" y="6" width="6" height="6" fill="#1a1a1a"/>
+            <rect x="36" y="6" width="6" height="6" stroke="#1a1a1a" stroke-width="1.5" fill="none" stroke-dasharray="2,1"/>
+          </svg>
+        </div>
+        <div class="project-body">
+          <div class="project-num">P.06 · Global Wheat Consortium · Model Development · 2025</div>
+          <h3>Global Wheat Full Semantic Segmentation (GWFSS) Challenge</h3>
+          <p>Built deep-learning semantic segmentation models for in-field wheat imagery as part of the GWFSS challenge organised by the Global Wheat Consortium (Codalab, Apr – Jun 2025; 142 participants, 747 submissions). Distinguished crop, leaf, and background pixels across diverse canopy and illumination conditions. <em>Apr – Jun 2025</em>.</p>
+        </div>
+        <div class="project-foot">
+          <div class="tags">
+            <span class="tag">Semantic Seg.</span>
+            <span class="tag">Wheat</span>
+            <span class="tag">Field Imagery</span>
+            <span class="tag">Benchmark</span>
+          </div>
+          <a class="project-link" href="https://www.global-wheat.com/" target="_blank">Site</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORAL PRESENTATIONS -->
+<section id="presentations" class="body-section" style="background:var(--surface-soft);">
+  <div class="section-inner">
+    <div class="section-eyebrow">04 / Presentations</div>
+    <h2 class="section-title">Oral presentations</h2>
+    <div class="section-divider"></div>
+
+    <div class="pub-list">
+      <div class="pub-card">
+        <div class="pub-index">[T1]</div>
+        <div class="pub-body">
+          <div class="pub-title">Enhancing size estimation of on-plant oriental melons using occlusion recovery models and diffusion model-based data augmentation</div>
+          <div class="pub-venue">GreenSys · Spain</div>
+        </div>
+        <div class="pub-meta"><span class="pub-year">Jun 2025</span></div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-index">[T2]</div>
+        <div class="pub-body">
+          <div class="pub-title">Depth-fused amodal segmentation for enhanced detection and sizing of occluded oriental melons in automated harvesting systems</div>
+          <div class="pub-venue">ASABE Annual International Meeting · USA</div>
+        </div>
+        <div class="pub-meta"><span class="pub-year">Jul 2024</span></div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-index">[T3]</div>
+        <div class="pub-body">
+          <div class="pub-title">Application of instance segmentation and occlusion recovery algorithm for autonomous harvesting of greenhouse vegetables</div>
+          <div class="pub-venue">Postharvest ISHS · Netherlands</div>
+        </div>
+        <div class="pub-meta"><span class="pub-year">May 2023</span></div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-index">[T4]</div>
+        <div class="pub-body">
+          <div class="pub-title">Precise leaf temperature extraction technique for the estimation of crop water stress</div>
+          <div class="pub-venue">Asian Association of Environmental and Resource Economics · Online</div>
+        </div>
+        <div class="pub-meta"><span class="pub-year">Aug 2021</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards" class="body-section">
+  <div class="section-inner">
+    <div class="section-eyebrow">05 / Awards</div>
+    <h2 class="section-title">Honors, scholarships &amp; awards</h2>
+    <div class="section-divider"></div>
+
+    <div class="awards-grid">
+      <div class="award-card honor">
+        <span class="award-mark">Scholarship</span>
+        <div>
+          <div class="award-title">SNU Agricultural Engineering Scholarship</div>
+          <div class="award-by">SNU Agricultural Engineering Foundation · Mar 2021 – Feb 2025</div>
+        </div>
+      </div>
+      <div class="award-card honor">
+        <span class="award-mark">Scholarship</span>
+        <div>
+          <div class="award-title">Sangrok Cultural Scholarship (Fully funded)</div>
+          <div class="award-by">Sangrok Cultural Foundation · Mar 2020 – Aug 2020</div>
+        </div>
+      </div>
+      <div class="award-card honor">
+        <span class="award-mark">Scholarship</span>
+        <div>
+          <div class="award-title">Overseas Agriculture Sector Intern Scholarship</div>
+          <div class="award-by">MAFRA · Mar 2019 – Jul 2019</div>
+        </div>
+      </div>
+      <div class="award-card honor">
+        <span class="award-mark">Scholarship</span>
+        <div>
+          <div class="award-title">MAFRA Scholarship (Fully funded)</div>
+          <div class="award-by">Korea Rural Community Scholarship Foundation · Mar 2018 – Feb 2019</div>
+        </div>
+      </div>
+      <div class="award-card honor">
+        <span class="award-mark">3rd Place</span>
+        <div>
+          <div class="award-title">Agdata Lab (Service Development), Team</div>
+          <div class="award-by">EPIS · Sep 2018</div>
+        </div>
+      </div>
+      <div class="award-card honor">
+        <span class="award-mark">1st Place</span>
+        <div>
+          <div class="award-title">SNU–KAIST Associate Undergraduate Research Program</div>
+          <div class="award-by">EPIS · Dec 2017</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<div class="cta-strip">
+  <div class="cta-strip-inner">
+    <div>
+      <h2>Open to postdoc collaborations.</h2>
+      <p>Interested in plant phenotyping, 3D perception, or self-supervised learning for agriculture? Let&rsquo;s talk.</p>
+    </div>
+    <div class="cta-strip-buttons">
+      <a class="btn-primary" href="mailto:sj0408@snu.ac.kr">Email me</a>
+      <a class="btn-outline-dark" href="https://www.linkedin.com/in/sungjay-kim/" target="_blank">LinkedIn →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="footer-col">
+        <h5>Site</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#publications">Publications</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#presentations">Talks</a></li>
+          <li><a href="#awards">Awards</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Research</h5>
+        <ul>
+          <li><a href="#projects">Plant phenotyping</a></li>
+          <li><a href="#projects">3D shape completion</a></li>
+          <li><a href="#projects">UAV thermal imaging</a></li>
+          <li><a href="#projects">Diffusion augmentation</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Profiles</h5>
+        <ul>
+          <li><a href="https://scholar.google.com/citations?user=8Ty8q9sAAAAJ&hl=ko" target="_blank">Google Scholar</a></li>
+          <li><a href="https://www.linkedin.com/in/sungjay-kim/" target="_blank">LinkedIn</a></li>
+          <li><a href="https://github.com/" target="_blank">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Contact</h5>
+        <ul>
+          <li><a href="mailto:sj0408@snu.ac.kr">sj0408@snu.ac.kr</a></li>
+          <li>SNUPHEL Lab</li>
+          <li>Seoul National University</li>
+          <li>Seoul, South Korea</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-base">
+      <div class="footer-brand">
+        <span class="brand-square"></span>
+        <span>Sungjay Kim</span>
+      </div>
+      <div class="footer-fine">© 2026 Sungjay Kim · Built with the NVIDIA design system</div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
