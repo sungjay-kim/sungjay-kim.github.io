@@ -82,8 +82,19 @@
       letter-spacing: 0;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-right: 48px;
+    }
+    .nav-brand .brand-photo {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: 50% 30%; /* tweak vertical % to re-center on faces */
+      border: 1.5px solid var(--primary);
+      display: block;
+      flex-shrink: 0;
+      image-orientation: from-image;
     }
     .nav-brand .brand-square {
       width: 12px;
@@ -856,7 +867,7 @@
 <!-- PRIMARY NAV -->
 <nav class="primary-nav">
   <a class="nav-brand" href="#">
-    <span class="brand-square"></span>
+    <img class="brand-photo" src="assets/nav.jpeg" alt="Sungjay Kim" />
     <span>Sungjay Kim</span>
   </a>
   <ul class="nav-links">
