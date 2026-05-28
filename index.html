@@ -299,6 +299,15 @@
       line-height: 1.25;
       color: var(--on-dark);
     }
+    .hero-stat-link {
+      color: var(--on-dark);
+      border-bottom: 1px solid var(--hairline-strong);
+      transition: color 0.15s, border-color 0.15s;
+    }
+    .hero-stat-link:hover {
+      color: var(--primary);
+      border-color: var(--primary);
+    }
 
     /* ── SECTION ── */
     section.body-section {
@@ -969,16 +978,16 @@
   <!-- stats -->
   <div class="hero-stats">
     <div class="hero-stat">
+      <div class="label">Location</div>
+      <div class="value">Seoul, South Korea</div>
+    </div>
+    <div class="hero-stat">
       <div class="label">Institution</div>
       <div class="value">Seoul National University</div>
     </div>
     <div class="hero-stat">
       <div class="label">Lab</div>
-      <div class="value">SNUPHEL</div>
-    </div>
-    <div class="hero-stat">
-      <div class="label">Publications</div>
-      <div class="value">8 + 3 in prep</div>
+      <div class="value"><a class="hero-stat-link" href="https://snuphel.snu.ac.kr/" target="_blank" rel="noopener">SNUPHEL ↗</a></div>
     </div>
   </div>
 </section>
