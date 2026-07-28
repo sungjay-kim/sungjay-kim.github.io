@@ -43,7 +43,7 @@ The live site refreshes in about 30 seconds.
 
 ## Sections
 
-- **About**: bio, education, research interests, tools, experience, patent
+- **About**: bio, education, tools, experience, patent
 - **Publications**: 2 first-author peer-reviewed papers, 6 co-author papers (collapsible), 3 manuscripts in preparation
 - **Projects**: 5 funded research projects (IPET, RDA) plus the GWFSS challenge
 - **Talks**: 4 oral presentations
